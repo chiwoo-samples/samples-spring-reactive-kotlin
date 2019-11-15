@@ -25,7 +25,7 @@ class HomeSensorsHandler {
     fun getAllDevices(request: ServerRequest): Mono<ServerResponse> =
             ServerResponse.ok().body(fromValue(arrayOf("lamp", "tv")))
 
-    fun getAllDeviceApi(request: ServerRequest): Mono<ServerResponse> =
+    fun listDevices(request: ServerRequest): Mono<ServerResponse> =
             ServerResponse.ok().body(fromValue(arrayListOf("kettle", "fridge")))
 
     fun setDeviceReadingApi(request: ServerRequest): Mono<ServerResponse> {

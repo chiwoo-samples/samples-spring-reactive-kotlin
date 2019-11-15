@@ -16,8 +16,7 @@ import reactor.test.StepVerifier
 @WebFluxTest(controllers = [SimpleController::class])
 class SimpleControllerTest {
 
-    val logger = LoggerFactory.getLogger(javaClass)
-
+    private val logger = LoggerFactory.getLogger(javaClass)
 
     @Autowired
     lateinit var client: WebTestClient
@@ -34,12 +33,15 @@ class SimpleControllerTest {
                 .expectStatus().isOk
     }
 
+
+    private val testClient = WebTestClient.bindToController(SimpleController()).build()
+
     /**
      * @see [SimpleController.getNumbers] getNumbers
      */
     @Test
     fun getNumbersForFlux() {
-        val result: FluxExchangeResult<Int> = client.get()
+        val result: FluxExchangeResult<Int> = testClient.get()
                 .uri("/numbers")
                 .accept(MediaType.APPLICATION_STREAM_JSON)
                 .exchange()

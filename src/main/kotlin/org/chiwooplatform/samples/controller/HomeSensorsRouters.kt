@@ -25,7 +25,7 @@ class HomeSensorsRouters(private val handler: HomeSensorsHandler) {
             GET("/device/{id}", handler::getDeviceReadings)
         }
         (accept(APPLICATION_JSON) and "/api").nest {
-            (GET("/device/") or GET("/devices/")).invoke(handler::getAllDeviceApi)
+            (GET("/device/") or GET("/devices/")).invoke(handler::listDevices)
             POST("/device/", handler::setDeviceReadingApi)
         }
     }

@@ -1,16 +1,20 @@
 package org.chiwooplatform.samples.controller
 
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.test.web.reactive.server.WebTestClient
 
 class SimpleRouteTest {
 
-    lateinit var client: WebTestClient
+    companion object {
 
-    @BeforeEach
-    fun init() {
-        this.client = WebTestClient.bindToRouterFunction(SimpleRoute().route()).build()
+        lateinit var client: WebTestClient
+
+        @BeforeAll
+        @JvmStatic
+        internal fun beforeAll() {
+            client = WebTestClient.bindToRouterFunction(SimpleRoute().route()).build()
+        }
     }
 
     /**
@@ -24,7 +28,6 @@ class SimpleRouteTest {
                 .expectStatus().isOk
     }
 
-
     /**
      * @see [SimpleRoute.route] route
      */
@@ -36,6 +39,5 @@ class SimpleRouteTest {
                 .expectBody()
                 .json("[1, 2, 3]")
     }
-
 
 }
